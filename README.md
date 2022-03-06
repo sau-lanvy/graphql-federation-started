@@ -13,4 +13,4 @@
 ```
 
 ## Graph Federation Architecture
-![Graph Federation Architecture](./docs/f_architecture.png)
+![Graph Federation Architecture](./docs/f_architecture..png)
