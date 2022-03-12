@@ -3,12 +3,11 @@
 
 ```mermaid
   graph TD
-      ingress--> gateway
       gateway--> products & inventory & accounts & reviews
-      products--> P[product database]
+      products--> P[products database]
       inventory--> I[inventory database]
       accounts--> A[accounts database]
-      reviews--> R[review database]
+      reviews--> R[reviews database]
   
 ```
 
