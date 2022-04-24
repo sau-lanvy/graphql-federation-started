@@ -1,0 +1,27 @@
+# Packages stage
+FROM node:14-alpine as packages
+
+# Create root application folder
+WORKDIR /app
+
+# Copy configs to /app folder
+COPY package*.json ./
+COPY tsconfig.json ./
+# Copy source code to /app/src folder
+COPY src /app/src
+
+# Check files list
+RUN ls -a
+# Installing packages
+RUN npm install
+
+# Build stage
+FROM packages
+
+# Check files list
+RUN ls -a
+
+# Building TypeScript files
+RUN npm run build
+
+CMD [ "node", "./dist/index.js" ]

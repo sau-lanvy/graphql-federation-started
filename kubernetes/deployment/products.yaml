@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deployment
+  labels:
+    app: products
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+        - name: products
+          image: registry.local:4000/products:0.0.2
+          ports:
+          - containerPort: 7073
+          resources:
+            limits:
+              memory: "200Mi"
+              #cpu: "100"
+            requests:
+              memory: "100Mi"
+              #cpu: "50"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-service
+spec:
+  selector:
+    app: products
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 7073
+      targetPort: 7073 # container port

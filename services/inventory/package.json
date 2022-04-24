@@ -1,0 +1,44 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "preserve": "npm run build",
+    "serve": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
+    "prestart": "npm run build",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "npm run codegen",
+    "codegen": "graphql-codegen --config ./codegen.yml"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/federation": "^0.25.2",
+    "@opentelemetry/api": "^1.0.3",
+    "@opentelemetry/core": "^0.22.0",
+    "@opentelemetry/exporter-zipkin": "^0.22.0",
+    "@opentelemetry/instrumentation-express": "^0.22.0",
+    "@opentelemetry/instrumentation-graphql": "^0.22.0",
+    "@opentelemetry/instrumentation-http": "^0.22.0",
+    "@opentelemetry/node": "^0.22.0",
+    "@types/node": "^16.11.10",
+    "apollo-graphql": "^0.9.5",
+    "apollo-server": "^2.25.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "helmet": "^4.6.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
+    "@graphql-codegen/typescript-resolvers": "^2.4.2",
+    "concurrently": "^6.4.0",
+    "nodemon": "^2.0.15",
+    "graphql": "^15.5.0"
+  }
+}

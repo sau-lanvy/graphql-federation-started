@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reviews-deployment
+  labels:
+    app: reviews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reviews
+  template:
+    metadata:
+      labels:
+        app: reviews
+    spec:
+      containers:
+        - name: reviews
+          image: registry.local:4000/reviews:0.0.2
+          ports:
+          - containerPort: 7075
+          resources:
+            limits:
+              memory: "200Mi"
+              #cpu: "100"
+            requests:
+              memory: "100Mi"
+              #cpu: "50"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews-service
+spec:
+  selector:
+    app: reviews
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 7075
+      targetPort: 7075

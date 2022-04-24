@@ -1,0 +1,12 @@
+overwrite: true
+schema: src/schema/index.ts
+generates:
+  ./src/generated/schema-types.ts:
+    hooks:
+      afterAllFileWrite:
+        - eslint --fix
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      useIndexSignature: true 
