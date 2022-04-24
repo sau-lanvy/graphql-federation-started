@@ -1,3 +1,6 @@
+
+> Detail steps how to set up infrastructure and run the services will be documented at https://hahoangv.gitbook.io/graphql-federation-started/
+
 # Architectures
 ## Microservice Architecture
 
