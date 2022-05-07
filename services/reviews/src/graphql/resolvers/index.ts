@@ -1,4 +1,4 @@
-import { reviews, usernames} from '../models';
+import { reviews, usernames} from '../../models';
 import { Resolvers, Review } from "../generated/schema-types";
 
 const resolvers: Resolvers = {
