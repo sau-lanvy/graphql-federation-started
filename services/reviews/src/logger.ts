@@ -1,10 +1,10 @@
-const winston = require('winston');
+import winston from 'winston';
 
 const loggerFormat = winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp(),
-    winston.format.json(),
-    winston.format.errors({ stack: true })
+  winston.format.colorize(),
+  winston.format.timestamp(),
+  winston.format.json(),
+  winston.format.errors({ stack: true }),
 );
 
 export const logger = winston.createLogger({
@@ -13,7 +13,7 @@ export const logger = winston.createLogger({
   defaultMeta: { service: 'reviews-service' },
   transports: [
     new winston.transports.Console({
-        format: winston.format.simple(),
-    })
+      format: winston.format.simple(),
+    }),
   ],
 });
