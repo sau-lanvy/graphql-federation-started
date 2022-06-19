@@ -7,20 +7,21 @@ const resolvers: Resolvers = {
 			return { __typename: 'User', id: review.authorID };
 		},
 		product(review: any) {
-			return { __typename: 'Product', upc: review.upc };
+			return { __typename: 'Product', upc: review.product?.upc };
 		},
 	},
 	User: {
-		reviews(user) {
+		reviews(user: any) {
 			return reviews.filter((review) => review.authorID === user.id);
 		},
-		numberOfReviews(user: Review) {
-			return reviews.filter((review) => review.authorID === user.id)
+		numberOfReviews(rev: Review) {
+			return reviews.filter((review) => review.authorID === rev.id)
 				.length;
 		},
-		username(user) {
-			const found = usernames.find((username) => username.id === user.id);
-			return found ? found.username : null;
+		username(user: any) {
+			// const found = usernames.find((username) => username.id === user.id);
+			// return found ? found.username : null;
+			return usernames[0].username;
 		},
 	},
 	Product: {
@@ -30,6 +31,11 @@ const resolvers: Resolvers = {
 			);
 		},
 	},
+	Query: {
+        reviews(_: any, args: any) {
+            return reviews;
+        }
+    }
 };
 
 export default resolvers;

@@ -1,5 +1,5 @@
 //import users data
-import { users } from '../models';
+import { users } from '../../models';
 import { Resolvers, User } from '../generated/schema-types';
 
 const resolvers: Resolvers = {

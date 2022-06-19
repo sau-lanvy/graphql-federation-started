@@ -1,48 +1,33 @@
-import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
+const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
 
-import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-http';
-import { ZipkinExporter } from '@opentelemetry/exporter-zipkin';
-import {
+const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+const { ZipkinExporter } = require('@opentelemetry/exporter-zipkin');
+const {
   Instrumentation,
   registerInstrumentations,
-} from '@opentelemetry/instrumentation';
-import { ExpressInstrumentation } from '@opentelemetry/instrumentation-express';
+} = require('@opentelemetry/instrumentation');
+const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
 
-import { GraphQLInstrumentation } from '@opentelemetry/instrumentation-graphql';
-import { HttpInstrumentation } from '@opentelemetry/instrumentation-http';
-import { Resource } from '@opentelemetry/resources';
-import { BatchSpanProcessor, ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
+const { GraphQLInstrumentation } = require('@opentelemetry/instrumentation-graphql');
+const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+const { Resource } = require('@opentelemetry/resources');
+const { BatchSpanProcessor, ConsoleSpanExporter, SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+const { NodeTracerProvider } = require('@opentelemetry/sdk-trace-node');
 
-
-export enum GraphNodeType {
-  Router = 'router',
-  Subgraph = 'subgraph',
+const GraphNodeType = {
+  Router: 'router',
+  Subgraph: 'subgraph',
 }
 
-export enum ExporterType {
-  Console = 'console',
-  Zipkin = 'zipkin',
-  Collector = 'collector',
+const ExporterType = {
+  Console: 'console',
+  Zipkin: 'zipkin',
+  Collector: 'collector',
 }
 
-export interface ApolloOpenTelemetryExporterProps {
-  readonly type: ExporterType;
-  readonly host?: string;
-  readonly port?: string;
-}
+module.exports = class ApolloOpenTelemetry {
 
-export interface ApolloOpenTelemetryProps {
-  readonly type: GraphNodeType;
-  readonly name?: string;
-  readonly exporter?: ApolloOpenTelemetryExporterProps;
-  readonly debug?: boolean;
-}
-
-export class ApolloOpenTelemetry {
-  private props: ApolloOpenTelemetryProps
-
-  public constructor(props: ApolloOpenTelemetryProps) {
+  constructor(props) {
     this.props = props;
 
     if (props.debug) {
@@ -50,13 +35,13 @@ export class ApolloOpenTelemetry {
     }
   }
 
-  public setupInstrumentation() {
+  setupInstrumentation() {
     const name = this.props.name ?? this.props.type;
     const resource = new Resource({
       'service.name': name,
     });
 
-    const instrumentations: Instrumentation[] = [];
+    const instrumentations = [];
     switch (this.props.type) {
       case GraphNodeType.Router:
         instrumentations.push( new HttpInstrumentation() );

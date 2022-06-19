@@ -1,7 +1,7 @@
 overwrite: true
-schema: src/schema/index.ts
+schema: src/graphql/schema/index.ts
 generates:
-  ./src/generated/schema-types.ts:
+  ./src/graphql/generated/schema-types.ts:
     hooks:
       afterAllFileWrite:
         - eslint --fix

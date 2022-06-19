@@ -1,9 +1,11 @@
-import { products } from '../models';
+import { products } from '../../models';
 import { Resolvers, Product } from '../generated/schema-types';
+import { logger } from '../../logger';
 
 const resolvers: Resolvers = {
     Product: {
-        __resolveReference(object: Product): Product {
+        __resolveReference(object: any): Product {
+            logger.info(object);
             return products.find(product => product.upc === object.upc) as Product;
         }
     },
