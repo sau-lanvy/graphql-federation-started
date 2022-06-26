@@ -1,5 +1,5 @@
 import { Resolvers, Product } from '../generated/schema-types';
-import {  inventory } from '../models';
+import {  inventory } from '../../models';
 
 const resolvers: Resolvers = {
     Product: {
