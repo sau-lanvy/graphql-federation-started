@@ -1,6 +1,3 @@
-
-> Detail steps how to set up infrastructure and run the services will be documented at https://hahoangv.gitbook.io/graphql-federation-started/
-
 # Architectures
 ## Microservice Architecture
 
@@ -13,6 +10,3 @@
       reviews--> R[reviews database]
   
 ```
-
-## Graph Federation Architecture
-![Graph Federation Architecture](./docs/f_architecture..png)
